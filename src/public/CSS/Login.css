@@ -1,0 +1,31 @@
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 8px;
+  background: #150202;
+}
+
+.h-custom {
+  height: 100vh; /* Set a base height of 100% */
+  display: flex;
+  flex-direction: column;
+
+}
+.h-row .h-custom1{
+  width: 40%;
+}
+.h-row{
+    flex-grow: 1;
+    align-items: center;
+}
+.col-md-6{
+  width: "40%";
+}
+
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100%; /* Reset height to 100% for smaller screens */
+    max-height: none; /* Remove the maximum height constraint */
+  }
+}
