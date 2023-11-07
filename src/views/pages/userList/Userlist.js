@@ -40,6 +40,7 @@ const UserList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editData, setEditData] = useState({});
 
   // useEffect(() => {
@@ -75,11 +76,17 @@ const UserList = () => {
 
   //         });
   // }, []);
-  // const openEditModal = (rowData) => {
-  //     setEditData(rowData);
-  //     setIsEditModalOpen(true);
-  // };
-
+  const openEditModal = (rowData) => {
+    setEditData(rowData);
+    setIsEditModalOpen(true);
+  };
+  const openAddModal = (rowData) => {
+    // setEditData(rowData);
+    setIsAddModalOpen(true);
+  };
+  const closeAddModal = () => {
+    setIsAddModalOpen(false);
+  };
   const closeEditModal = () => {
     setIsEditModalOpen(false);
   };
@@ -100,9 +107,20 @@ const UserList = () => {
   return (
     <div className="table-container">
       {isLoading ? (
-        <div className="loader">{/* <CircularProgress /> */}</div>
+        <div className="loader">
+          {/* <CircularProgress /> */}
+          <Button>ADD</Button>
+        </div>
       ) : (
         <TableContainer component={Paper}>
+          <Button
+            style={{ position: "relative", left: "90%" }}
+            variant="outlined"
+            color="warning"
+            onClick={() => openAddModal()}
+          >
+            ADD
+          </Button>
           <Table className="data-table">
             <TableHead>
               <TableRow>
@@ -155,12 +173,71 @@ const UserList = () => {
           </Table>
         </TableContainer>
       )}
+      {/* Add button */}
+      <Dialog open={isAddModalOpen} onClose={closeAddModal}>
+        <DialogTitle>Add Data</DialogTitle>
+        <DialogContent>
+          <form>
+            <TextField
+              label="CASE NO"
+              variant="filled"
+              fullWidth
+              //   value={editData.name}
+              onChange={(e) =>
+                setEditData({ ...editData, name: e.target.value })
+              }
+            />
+            <TextField
+              label="THANA NAME"
+              variant="filled"
+              fullWidth
+              //   value={editData.account}
+              onChange={(e) =>
+                setEditData({ ...editData, account: e.target.value })
+              }
+            />
+            <TextField
+              label="No OF CASE"
+              variant="filled"
+              fullWidth
+              //   value={editData.token}
+              onChange={(e) =>
+                setEditData({ ...editData, token: e.target.value })
+              }
+            />
+            <TextField
+              label="CASE TYPE"
+              variant="filled"
+              fullWidth
+              //   value={editData.balance}
+              onChange={(e) =>
+                setEditData({ ...editData, balance: e.target.value })
+              }
+            />
+            <TextField
+              label="CONTACT NO"
+              variant="filled"
+              fullWidth
+              //   value={editData.ip}
+              onChange={(e) => setEditData({ ...editData, ip: e.target.value })}
+            />
+          </form>
+        </DialogContent>
+        <DialogActions>
+          {/* <Button onClick={closeEditModal}>Cancel</Button> */}
+          <Button
+            // onClick={handleEditData}
+            variant="outlined"
+            color="warning"
+            style={{ position: "relative", right: "20px" }}
+          >
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       {/* Edit Modal */}
-      <Dialog
-        open={isEditModalOpen}
-        //   onClose={closeEditModal}
-      >
+      <Dialog open={isEditModalOpen} onClose={closeEditModal}>
         <DialogTitle>Edit Data</DialogTitle>
         <DialogContent>
           <form>
@@ -174,44 +251,40 @@ const UserList = () => {
               }
             />
             <TextField
-              label="Account"
+              label="CASE NO"
               variant="filled"
               fullWidth
-              value={editData.account}
+              value={editData.Case_NO}
               onChange={(e) =>
                 setEditData({ ...editData, account: e.target.value })
               }
-              disabled
             />
             <TextField
-              label="Token"
+              label="NO OF CASE"
               variant="filled"
               fullWidth
-              value={editData.token}
+              value={editData.No_Of_Case}
               onChange={(e) =>
                 setEditData({ ...editData, token: e.target.value })
               }
-              disabled
             />
             <TextField
-              label="Balance"
+              label="CASE TYPE"
               variant="filled"
               fullWidth
-              value={editData.balance}
+              value={editData.Case_Type}
               onChange={(e) =>
                 setEditData({ ...editData, balance: e.target.value })
               }
-              disabled
             />
             <TextField
-              label="IP"
+              label="CONTACT NO"
               variant="filled"
               fullWidth
-              value={editData.ip}
+              value={editData.contact_No}
               onChange={(e) => setEditData({ ...editData, ip: e.target.value })}
-              disabled
             />
-            <FormControl variant="outlined" fullWidth>
+            {/* <FormControl variant="outlined" fullWidth>
               <InputLabel id="status-label">Status</InputLabel>
               <Select
                 labelId="status-label"
@@ -227,7 +300,7 @@ const UserList = () => {
                 <MenuItem value="Active">Active</MenuItem>
                 <MenuItem value="Inactive">Inactive</MenuItem>
               </Select>
-            </FormControl>
+            </FormControl> */}
           </form>
         </DialogContent>
         <DialogActions>
