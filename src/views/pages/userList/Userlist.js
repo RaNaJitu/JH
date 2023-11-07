@@ -114,7 +114,7 @@ const UserList = () => {
       ) : (
         <TableContainer component={Paper}>
           <Button
-            style={{ position: "relative", left: "90%" }}
+            style={{ position: "relative", left: "20px", top: "10px" }}
             variant="outlined"
             color="warning"
             onClick={() => openAddModal()}
@@ -145,6 +145,7 @@ const UserList = () => {
                   {/* <TableCell>{item.status ? "Active" : "Inactive"}</TableCell> */}
                   <TableCell>
                     <Button
+                      style={{ marginRight: "10px" }}
                       variant="outlined"
                       color="primary"
                       onClick={() => openEditModal(item)}
